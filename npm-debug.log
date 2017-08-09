@@ -1,0 +1,71 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/Cellar/node/6.3.0/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'adduser' ]
+2 info using npm@3.10.3
+3 info using node@v6.3.0
+4 verbose adduser before first PUT { _id: 'org.couchdb.user:sevenrich',
+4 verbose adduser   name: 'sevenrich',
+4 verbose adduser   password: 'XXXXX',
+4 verbose adduser   email: 'sevenrich@163.com',
+4 verbose adduser   type: 'user',
+4 verbose adduser   roles: [],
+4 verbose adduser   date: '2017-08-09T13:31:05.623Z' }
+5 verbose request uri https://registry.npmjs.org/-/user/org.couchdb.user:sevenrich
+6 verbose request new user, so can't send auth
+7 info attempt registry request try #1 at 21:31:05
+8 verbose request id 89985294bb69dc16
+9 http request PUT https://registry.npmjs.org/-/user/org.couchdb.user:sevenrich
+10 http 401 https://registry.npmjs.org/-/user/org.couchdb.user:sevenrich
+11 verbose headers { 'content-type': 'application/json',
+11 verbose headers   'cache-control': 'max-age=300',
+11 verbose headers   'content-length': '46',
+11 verbose headers   'accept-ranges': 'bytes',
+11 verbose headers   date: 'Wed, 09 Aug 2017 13:30:59 GMT',
+11 verbose headers   via: '1.1 varnish',
+11 verbose headers   connection: 'keep-alive',
+11 verbose headers   'x-served-by': 'cache-nrt6127-NRT',
+11 verbose headers   'x-cache': 'MISS',
+11 verbose headers   'x-cache-hits': '0',
+11 verbose headers   'x-timer': 'S1502285459.098115,VS0,VE574',
+11 verbose headers   vary: 'Accept-Encoding, Accept' }
+12 verbose request invalidating /Users/Seven/.npm/registry.npmjs.org/-/user/org.couchdb.user_3Asevenrich on PUT
+13 verbose adduser back [ { Error: Registry returned 401 for PUT on https://registry.npmjs.org/-/user/org.couchdb.user:sevenrich
+13 verbose adduser       at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+13 verbose adduser       at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:242:14)
+13 verbose adduser       at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+13 verbose adduser       at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:200:22)
+13 verbose adduser       at emitTwo (events.js:106:13)
+13 verbose adduser       at Request.emit (events.js:191:7)
+13 verbose adduser       at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1067:10)
+13 verbose adduser       at emitOne (events.js:101:20)
+13 verbose adduser       at Request.emit (events.js:188:7)
+13 verbose adduser       at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:988:12) statusCode: 401, code: 'E401' },
+13 verbose adduser   { ok: false, id: 'org.couchdb.user:undefined' },
+13 verbose adduser   '{"ok":false,"id":"org.couchdb.user:undefined"}' ]
+14 warn adduser Incorrect username or password
+14 warn adduser You can reset your account by visiting:
+14 warn adduser
+14 warn adduser     https://npmjs.org/forgot
+15 verbose stack Error: Registry returned 401 for PUT on https://registry.npmjs.org/-/user/org.couchdb.user:sevenrich
+15 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+15 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:242:14)
+15 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+15 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:200:22)
+15 verbose stack     at emitTwo (events.js:106:13)
+15 verbose stack     at Request.emit (events.js:191:7)
+15 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1067:10)
+15 verbose stack     at emitOne (events.js:101:20)
+15 verbose stack     at Request.emit (events.js:188:7)
+15 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:988:12)
+16 verbose statusCode 401
+17 verbose cwd /Users/Seven/Learn/NodeJs/SevenChat/test
+18 error Darwin 16.7.0
+19 error argv "/usr/local/Cellar/node/6.3.0/bin/node" "/usr/local/bin/npm" "adduser"
+20 error node v6.3.0
+21 error npm  v3.10.3
+22 error code E401
+23 error Registry returned 401 for PUT on https://registry.npmjs.org/-/user/org.couchdb.user:sevenrich
+24 error If you need help, you may report this error at:
+24 error     <https://github.com/npm/npm/issues>
+25 verbose exit [ 1, true ]

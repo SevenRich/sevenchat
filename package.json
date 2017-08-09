@@ -1,0 +1,20 @@
+{
+  "name": "sevenchat",
+  "version": "0.1.0",
+  "description": "chat demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sevenchat"
+  ],
+  "author": {
+    "name": "SevenRich",
+    "email": "sevenrich@163.com"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "socket.io": "^2.0.3"
+  }
+}

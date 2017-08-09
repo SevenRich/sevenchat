@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SevenChat V1.0.0</title>
+    <style>
+        /*仿socket.io Demo样式*/
+        /*reset CSS*/
+        * {
+          box-sizing: border-box;
+        }
+        html {
+          font-weight: 300;
+          -webkit-font-smoothing: antialiased;
+        }
+        html, input {
+          font-family:"微软雅黑","黑体",sans-serif;
+        }
+        html, body {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+        ul {
+          list-style: none;
+          word-wrap: break-word;
+        }
+        /*pages*/
+        .pages{
+            height:100%;
+            width:100%;
+            padding:0;
+            margin:0;
+        }
+        .page{
+            height:100%;
+            width:100%;
+            position:absolute;
+        }
+        .chat.page .chatarea{
+            height:100%;
+            padding-bottom: 60px;
+        }
+        .chat.page .chatarea .messages{
+            height:100%;
+            overflow-y:scroll;
+            padding:10px 20px 10px 20px;
+            font-size: 150%;
+        }
+        .chat.page .messages .log {
+            text-align:center;
+            color:gray;
+            font-size: 75%;
+            margin:5px;
+        }
+        .chat.page .messages .message .username {
+            font-weight: 700;
+            overflow: hidden;
+            text-align: right;
+            padding-right: 15px;
+        }
+        .chat.page .messages .message .messageBody {
+        }
+        .chat.page .inputMessage {
+            border: 10px solid #000;
+            bottom: 0;
+            height: 60px;
+            left: 0;
+            outline: none;
+            border-radius: 0;
+            padding-left: 10px;
+            position: absolute;
+            right: 0;
+            width: 100%;
+            font-size: 100%;
+        }
+        .login.page{
+            background-color: #000;
+        }
+        .login.page .form{
+            height: 100px;
+            margin-top: -100px;
+            position: absolute;
+            text-align: center;
+            width:100%;
+            top:50%;
+        }
+        .login.page .title, .login.page .usernameInput{
+            color:#fff;
+            font-weight: 100;
+        }
+        .login.page .usernameInput{
+            background-color: transparent;
+            border: none;
+            border-radius: 0;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            padding-bottom: 15px;
+            text-align: center;
+            width: 400px;
+            font-size: 200%;
+            letter-spacing: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <ul class="pages">
+            <!-- 聊天室界面 -->
+            <li class="chat page">
+                <div class="chatarea">
+                    <!-- 聊天信息框 -->
+                    <ul class="messages">
+                    </ul>
+                </div>
+                <!-- 聊天文字输入框 -->
+                <input type="text" class="inputMessage" placeholder="请在此输入...">
+            </li>
+            <!-- 聊天昵称输入界面 -->
+            <li class="login page" id="loginPage" style="display:block;">
+                <div class="form">
+                    <h3 class="title">请输入昵称</h3>
+                    <input id="usernameInput" class="usernameInput" type="text" maxlength="14">
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- 引入socket.io.js -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- 引入jQuery操作Dom -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script>
+        // ip 192.168.13.205
+        var socket = io('http://192.168.13.205:8080');
+
+        // 聊天框盒子
+        var messages = $('.messages');
+        // 声明一个变量用来展示聊天框信息
+        var li;
+        // 声明一个变量用来存储聊天信息值
+        var message;
+
+        // 聊天用户登录，输入用户昵称
+        var username = $('.usernameInput').val();
+        // 无昵称显示昵称输入界面
+        if (!username) {
+            $('#loginPage').css('display', 'block');
+        }
+        // 回车提交 （回车事件）
+        $('.usernameInput').on('keydown', function (event) {
+            // 回车键码 13
+            if (event.keyCode == 13) {
+                // 取昵称
+                username = $('.usernameInput').val();
+                // 隐藏输入昵称界面
+                $('#loginPage').css('display', 'none');
+            }
+        });
+
+        // 接收事件
+        socket.on('message', function (data) {
+            console.log(data);
+            // 处理接收到的数据
+            if (data.type == 'msg') {
+                li = '<li class="message">'+
+                        '<span class="username">'+data.username+'</span>'+
+                        '<span class="messageBody">'+data.message+'</span>'+
+                     '<li>';
+            } else {
+                li = '<li class="log">'+data.message+'<li>';
+            }
+            // 将处理后的数据拼接到聊天框中
+            messages.append($(li));
+        });
+
+
+        // 回车提交聊天信息 （回车事件）
+        $('.inputMessage').on('keydown', function (event) {
+
+            // 取聊天信息
+            message = $('.inputMessage').val();
+
+            // 聊天信息无信息不处理
+            if (!message) return;
+
+            // 回车键码 13
+            if (event.keyCode == 13) {
+                // 怎么提交数据到服务端？
+                socket.emit('submitMessage', {username: username, message: message, type: 'msg'});
+
+                // 清空聊天框信息
+                $('.inputMessage').val('')
+            }
+        });
+    </script>
+
+</body>
+</html>
