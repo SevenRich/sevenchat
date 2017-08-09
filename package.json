@@ -14,6 +14,10 @@
     "email": "sevenrich@163.com"
   },
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:SevenRich/sevenchat.git"
+  },
   "dependencies": {
     "socket.io": "^2.0.3"
   }
